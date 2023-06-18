@@ -18,7 +18,7 @@ import { validateUserJWTToken } from "../api";
 
 import { useNavigate } from "react-router-dom";
 import { setUserDetails } from "../context/actions/userActions";
-import { alertInfo, alertWarning } from './../context/actions/alertActions';
+import { alertDanger, alertInfo, alertWarning } from './../context/actions/alertActions';
 
 /* Iport ends */
 
@@ -62,10 +62,10 @@ const Login = () => {
 
     const signUpWithEmailPass = async () => {
         if (userEmail === "" || password === "" || confirm_password === "") {
-            dispatch(alertInfo('Required fields should not be blank.'));
+            dispatch(alertDanger('Required fields should not be blank.'));
         } else {
             if (password.length < 6) {
-                dispatch(alertInfo('password is too short. at least 6 characters.'));
+                dispatch(alertDanger('password is too short. at least 6 characters.'));
 
             } else if (password === confirm_password) {
                 try {
@@ -92,7 +92,7 @@ const Login = () => {
                     // Handle specific errors
                     if (error.code === "auth/email-already-in-use") {
                         // Display an alert message indicating that the email is already in use
-                        dispatch(alertInfo('Email already in use'));
+                        dispatch(alertDanger('Email already in use'));
                     } else {
                         // Display a generic error message or handle other specific errors
                     }
